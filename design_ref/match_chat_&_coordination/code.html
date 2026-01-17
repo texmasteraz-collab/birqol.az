@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Match Chat &amp; Coordination | MatchUp Football</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a7ff24",
+                        "background-light": "#f1f1f3",
+                        "background-dark": "#1b1b1d",
+                        "surface-dark": "#2c2c2e",
+                        "border-dark": "#3a4b20",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3a4b20; border-radius: 10px; }
+        .message-bubble-in { border-radius: 2px 16px 16px 16px; }
+        .message-bubble-out { border-radius: 16px 2px 16px 16px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-solid border-border-dark px-6 py-3 bg-background-light dark:bg-background-dark z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark font-bold">sports_soccer</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight dark:text-white">MatchUp <span class="text-primary">Football</span></h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Find Matches</a>
+<a class="text-sm font-medium text-primary border-b-2 border-primary" href="#">My Games</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Teams</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Fields</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-surface-dark border border-border-dark text-white hover:border-primary transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb-fyBrumkoSIwGZ6265Su-EOZdHY5p9C1mTigb9LHRy1wlytnJaxcEN-ZQWVYfZ4XPbaVFQbOGBRyOcK3aNyfpeXqJerL3xN9fWAnNEzO2GUJ7ToKrBOFg3xvVbleI2fhfuTnh_XSuL8aG79vpNEfNp_lFjC85FuI6r5LDa9UL0VmiZWrNIVBiEg90kSLVBPaf6N0tO7RBG6xbMuu-eVWTzxMGkZJHAbLYYcpMyLQkmewGu173EANCyQ0VB62QL-ijsaWDD5eh8k"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-72 border-r border-border-dark bg-background-light dark:bg-background-dark flex flex-col shrink-0">
+<div class="p-6 flex flex-col h-full">
+<div class="mb-8">
+<h1 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">hub</span>
+                        Match Console
+                    </h1>
+<p class="text-primary/70 text-xs font-mono mt-1">ID: #44921-CONFIRMED</p>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-sm font-semibold">Active Coordination</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm font-medium">Player Roster</span>
+<span class="ml-auto bg-border-dark px-2 py-0.5 rounded text-[10px]">14/14</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Team Stats</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface-dark transition-colors" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm font-medium">House Rules</span>
+</a>
+</nav>
+<div class="mt-auto space-y-4">
+<!-- Progress Bar Component -->
+<div class="bg-surface-dark/50 p-4 rounded-xl border border-border-dark">
+<div class="flex justify-between items-end mb-2">
+<p class="text-xs font-bold text-white uppercase tracking-widest">Trust Level</p>
+<p class="text-primary text-xs font-bold">40%</p>
+</div>
+<div class="h-1.5 w-full bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 40%;"></div>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 leading-tight">Media sharing unlocks at 100% trust.</p>
+</div>
+<button class="w-full flex items-center justify-center gap-2 rounded-lg py-3 border border-red-500/30 text-red-500 hover:bg-red-500/10 text-xs font-bold uppercase tracking-wider transition-all">
+<span class="material-symbols-outlined text-sm">report_problem</span>
+                        Report Team
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Chat Area -->
+<main class="flex-1 flex flex-col bg-[#141415]">
+<!-- System Action Panel -->
+<div class="p-4 bg-background-dark/80 backdrop-blur-md border-b border-border-dark sticky top-0 z-10">
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 rounded-xl border border-primary/30 bg-primary/5 p-4 shadow-[0_0_20px_rgba(167,255,36,0.05)]">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">verified</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="bg-primary text-black text-[10px] font-black px-1.5 py-0.5 rounded tracking-tighter uppercase">Confirmed</span>
+<p class="text-white text-base font-bold leading-tight">Tonight at 7:00 PM</p>
+</div>
+<p class="text-slate-400 text-sm mt-0.5">Downtown Arena • Field 4 • 7v7</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg px-4 py-2 bg-primary text-background-dark text-sm font-bold transition-transform hover:scale-105">
+<span class="material-symbols-outlined mr-2 text-sm">map</span>
+                            Directions
+                        </button>
+<button class="flex items-center justify-center rounded-lg px-4 py-2 bg-surface-dark border border-border-dark text-white text-sm font-bold hover:bg-border-dark">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Messages Thread -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+<!-- System Divider -->
+<div class="flex items-center gap-4 py-2">
+<div class="h-[1px] flex-1 bg-border-dark"></div>
+<span class="text-[10px] font-mono text-slate-500 uppercase tracking-[0.2em]">Match Established • Aug 24</span>
+<div class="h-[1px] flex-1 bg-border-dark"></div>
+</div>
+<!-- Received Message -->
+<div class="flex items-end gap-3 max-w-[80%]">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 shrink-0 ring-1 ring-border-dark" data-alt="Strikers Captain avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7OnO56D-8henhZmF84EB62nhShJIUImW6tJA0M99uBBvTzhnKNOGc2Y1KEozrUmdmGqnJFWBGpZ6mpu4DwkL2rAn9xarx74hlc_wZO_mvAIJYA-3kmHHFQGCtjQeJCauwz5V6XqFVBmdgW2yhlVrfk5vEG1KGesRM2eKoHPcTBYISxe22L61jpBOotkevUhXsAYrf_T55iEGh_czvqILeXWm3_bOKUo3FXFvV9K1anthZa-9mzYFCzrbd-ZE0SoJhktBO0GZQbwI");'></div>
+<div class="flex flex-col gap-1">
+<p class="text-primary/70 text-[11px] font-bold uppercase tracking-wider ml-1">Team Captain - Strikers</p>
+<div class="message-bubble-in px-4 py-3 bg-surface-dark text-white text-sm leading-relaxed border border-border-dark">
+                            Hey! What kit colors are you guys wearing tonight? We have White and Sky Blue available.
+                        </div>
+</div>
+</div>
+<!-- Sent Message -->
+<div class="flex items-end gap-3 max-w-[80%] ml-auto flex-row-reverse">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 shrink-0 ring-1 ring-primary" data-alt="Your avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBh9nmPfrmGd_nBjjL1qP6SU2_6uMNG2Oh-z1RKBGlZtX3bNtROCPoK7sEA9IiJmxIef5FdEhv3OtMPmRoGUWKcwVFh-eCWxN7tAT2XRsBpFUPCJ4bPD2uWr6z9T4Bd3Q0GGF-R2xRMgXnHmi4eIhzZK_VwBsxBlfSCoL63eDGV6cWSZ6kTWFmFsv98yBo_QuzlCUxuURXtLVyOFih6XEWmqFQNBjCDbupO6xDdE3Z_Ec3pAXvCO2PBdQRIAODeQOZkLkodyk4TvHs");'></div>
+<div class="flex flex-col gap-1 items-end">
+<p class="text-slate-500 text-[11px] font-bold uppercase tracking-wider mr-1">You</p>
+<div class="message-bubble-out px-4 py-3 bg-primary/10 text-white text-sm leading-relaxed border border-primary/40 shadow-[0_0_15px_rgba(167,255,36,0.1)]">
+                            We'll go with Black kits. Sky Blue would be perfect for you guys to avoid a clash.
+                        </div>
+</div>
+</div>
+<!-- System Message -->
+<div class="flex justify-center">
+<div class="bg-surface-dark/40 border border-border-dark rounded-full px-4 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">bolt</span>
+<p class="text-[11px] text-slate-400 font-medium italic">Strikers Team are arriving at the location...</p>
+</div>
+</div>
+<!-- Received Message -->
+<div class="flex items-end gap-3 max-w-[80%]">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 shrink-0 ring-1 ring-border-dark" data-alt="Strikers Captain avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuArEERgPFKUk1gukbj2CmPX5hoQyDk_VlbH-9hkb7y3diszFZpl1qUaVjg5J42irbA-FbCNrM72juFFMH1yyjaPePHcNeXNan5UCjoValdWwGvFgooXTQscyIYhLkzafQ_gfxPAbClCs0BMR51sW03k3XJe0sPXecQ7z1ISVoPYlCwQxWDcOvF4rDz4ZR9oz7LN2eYSZTqFUQOEDkNUiTsAbrVNVyXaUbXSzd0Igiq3JepV2_tLbS8pVTFIPJHGsHtf1nYerA-Hydc");'></div>
+<div class="flex flex-col gap-1">
+<p class="text-primary/70 text-[11px] font-bold uppercase tracking-wider ml-1">Team Captain - Strikers</p>
+<div class="message-bubble-in px-4 py-3 bg-surface-dark text-white text-sm leading-relaxed border border-border-dark">
+                            Copy that. Sky Blue it is. See you in 30! ⚽️
+                        </div>
+<p class="text-[10px] text-slate-500 mt-1 ml-1">Seen 6:32 PM</p>
+</div>
+</div>
+</div>
+<!-- Message Input -->
+<div class="p-6 bg-background-dark border-t border-border-dark">
+<div class="flex flex-col gap-3">
+<!-- Quick Replies -->
+<div class="flex gap-2 overflow-x-auto pb-1 custom-scrollbar no-scrollbar">
+<button class="whitespace-nowrap rounded-full px-3 py-1 bg-surface-dark border border-border-dark text-[11px] font-bold text-slate-300 hover:text-primary transition-colors">On our way</button>
+<button class="whitespace-nowrap rounded-full px-3 py-1 bg-surface-dark border border-border-dark text-[11px] font-bold text-slate-300 hover:text-primary transition-colors">What's the score?</button>
+<button class="whitespace-nowrap rounded-full px-3 py-1 bg-surface-dark border border-border-dark text-[11px] font-bold text-slate-300 hover:text-primary transition-colors">Running 5 late</button>
+<button class="whitespace-nowrap rounded-full px-3 py-1 bg-surface-dark border border-border-dark text-[11px] font-bold text-slate-300 hover:text-primary transition-colors">Which pitch?</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="group relative">
+<button class="flex items-center justify-center w-10 h-10 rounded-lg bg-surface-dark border border-border-dark text-slate-500 cursor-not-allowed transition-all">
+<span class="material-symbols-outlined text-[20px]">image</span>
+</button>
+<div class="absolute bottom-full mb-2 left-0 w-48 p-2 bg-black text-white text-[10px] rounded hidden group-hover:block z-20 border border-primary/20">
+                                Complete 1 match with this team to unlock media sharing.
+                            </div>
+</div>
+<div class="flex-1 relative group">
+<input class="w-full bg-surface-dark border-border-dark rounded-xl px-4 py-3 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-slate-500" placeholder="Message Strikers..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600">
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary transition-colors">add_reaction</span>
+</div>
+</div>
+<button class="flex items-center justify-center w-12 h-12 rounded-xl bg-primary text-background-dark hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(167,255,36,0.3)]">
+<span class="material-symbols-outlined font-bold">send</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Detail Panel (Optional Info) -->
+<aside class="w-64 bg-background-dark border-l border-border-dark hidden xl:flex flex-col p-6">
+<h3 class="text-xs font-black uppercase tracking-widest text-slate-500 mb-6">Location Map</h3>
+<div class="w-full aspect-square rounded-xl bg-surface-dark border border-border-dark relative overflow-hidden mb-6 group cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-110" data-alt="Satellite map of football field" data-location="Downtown Football Arena" style="background-image: url('https://placeholder.pics/svg/300');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3">
+<p class="text-[10px] font-bold text-white">Downtown Arena</p>
+<p class="text-[8px] text-primary">Tap to expand</p>
+</div>
+</div>
+<h3 class="text-xs font-black uppercase tracking-widest text-slate-500 mb-4">Match Log</h3>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="w-[2px] h-full bg-primary/20 rounded-full relative">
+<div class="absolute top-0 -left-[3px] size-2 rounded-full bg-primary"></div>
+</div>
+<div>
+<p class="text-[11px] font-bold text-white">Match Confirmed</p>
+<p class="text-[10px] text-slate-500">2h ago by System</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-[2px] h-full bg-border-dark rounded-full relative">
+<div class="absolute top-0 -left-[3px] size-2 rounded-full bg-border-dark"></div>
+</div>
+<div>
+<p class="text-[11px] font-bold text-white">Field Reserved</p>
+<p class="text-[10px] text-slate-500">4h ago by Downtown Arena</p>
+</div>
+</div>
+<div class="flex gap-3 opacity-40">
+<div class="w-[2px] h-full bg-border-dark rounded-full relative">
+<div class="absolute top-0 -left-[3px] size-2 rounded-full bg-border-dark"></div>
+</div>
+<div>
+<p class="text-[11px] font-bold text-white">Post Match Review</p>
+<p class="text-[10px] text-slate-500 italic">Unlocks after 8:30 PM</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

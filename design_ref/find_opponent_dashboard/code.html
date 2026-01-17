@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Find Opponent Dashboard - MatchUp Football</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a7ff24",
+                        "background-light": "#f1f1f3",
+                        "background-dark": "#1b1b1d",
+                        "surface-dark": "#2c2c2e",
+                        "accent-blue": "#38bdf8"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .bento-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(167, 255, 36, 0.1);
+        }
+        .fab-glow {
+            box-shadow: 0 0 20px rgba(167, 255, 36, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+<div class="flex items-center gap-2">
+<div class="size-10 bg-primary flex items-center justify-center rounded-xl rotate-3">
+<span class="material-symbols-outlined text-background-dark font-bold">sports_soccer</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight uppercase hidden md:block">MatchUp <span class="text-primary">Football</span></h1>
+</div>
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-slate-200 dark:bg-surface-dark border-none rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-primary text-sm transition-all" placeholder="Search teams, fields or locations..." type="text"/>
+</div>
+</div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-sm font-semibold border-b-2 border-primary pb-1" href="#">Find Matches</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Fields</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Rankings</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-surface-dark rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full"></span>
+</button>
+<div class="size-10 rounded-lg bg-cover bg-center border-2 border-slate-700" data-alt="User profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRQ4UJQJGyL0ktQe2fO3FX78C0tjVHctWD8F_-swkLeXziFE8H1As4wo4jVit8boD5kFTL1AZi-9KnAUav3zOEgspssM5TRkM1IHatLssTAyipxth9aS-Fhn_iWjo4hXXT91KifoOEoKy6Y_GanBm3DIVsTzdOIXuveXnxQJtoi9DbbeWMjiIs1e6Q2ez8WsGfz895E_lPKj93Yi_ZouFbnN3l120bPNXXslJagtnlhaR-8xxgVtE30fSpXsZ8dvQZFoFNTH7GvYs')"></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1400px] mx-auto px-6 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Left Content Area (Feed) -->
+<div class="flex-1 space-y-6">
+<!-- Filter Bento Row -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<button class="flex items-center justify-between p-3 bg-slate-200 dark:bg-surface-dark rounded-xl border border-transparent hover:border-primary/50 transition-all">
+<div class="flex flex-col items-start">
+<span class="text-[10px] uppercase text-slate-500 font-bold">Format</span>
+<span class="text-sm font-semibold">5-a-side</span>
+</div>
+<span class="material-symbols-outlined text-primary">groups</span>
+</button>
+<button class="flex items-center justify-between p-3 bg-slate-200 dark:bg-surface-dark rounded-xl border border-transparent hover:border-primary/50 transition-all">
+<div class="flex flex-col items-start">
+<span class="text-[10px] uppercase text-slate-500 font-bold">Date</span>
+<span class="text-sm font-semibold">This Weekend</span>
+</div>
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+</button>
+<button class="flex items-center justify-between p-3 bg-slate-200 dark:bg-surface-dark rounded-xl border border-transparent hover:border-primary/50 transition-all">
+<div class="flex flex-col items-start">
+<span class="text-[10px] uppercase text-slate-500 font-bold">District</span>
+<span class="text-sm font-semibold">Downtown</span>
+</div>
+<span class="material-symbols-outlined text-primary">location_on</span>
+</button>
+<button class="flex items-center justify-between p-3 bg-slate-200 dark:bg-surface-dark rounded-xl border border-transparent hover:border-primary/50 transition-all">
+<div class="flex flex-col items-start">
+<span class="text-[10px] uppercase text-slate-500 font-bold">Skill</span>
+<span class="text-sm font-semibold">Semi-Pro</span>
+</div>
+<span class="material-symbols-outlined text-primary">bolt</span>
+</button>
+</div>
+<!-- Section Header -->
+<div class="flex items-center justify-between px-2">
+<h2 class="text-2xl font-bold tracking-tight">Active Match Requests</h2>
+<div class="flex items-center gap-2 text-sm font-medium text-slate-400">
+<span>Sort by:</span>
+<button class="text-primary flex items-center">Soonest <span class="material-symbols-outlined text-xs">keyboard_arrow_down</span></button>
+</div>
+</div>
+<!-- Feed Grid -->
+<div class="grid grid-cols-1 @container gap-6">
+<!-- Match Request Card 1 -->
+<div class="bento-card group relative overflow-hidden bg-slate-200 dark:bg-surface-dark rounded-2xl border border-slate-300 dark:border-slate-800 p-6">
+<div class="flex flex-col @md:flex-row gap-6 items-start @md:items-center">
+<div class="relative">
+<div class="size-20 rounded-full bg-slate-800 border-4 border-slate-700 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="FC Dragons team logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoAJBS7WXllri7TPtEnq0pPBt_syt-mKlEyIYE5TrSriuZ9BKNNW3AoKHk4vIbDF-FQQDnkFSYg9zQl3EkiQZ4fekAbLmCowXKexQUgFXJ4EcrNIAswNWkKe70o0GrZdT1CuJWyLDE-J65s4Xd8RJyptIP4zHRflCRAekkQrYt-aXz2Cjj0lASt1MBfMpyZGCcKxcZLkk6Z0Xv2Nie84wDjy_o8ciy53lu8q1eJr9m6Mex_5Mevs4oG5x6yTRlEFJHOdc3uG_Ea3o')"></div>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-background-dark text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-lg">9.2 Rating</div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-2">
+<h3 class="text-xl font-bold uppercase tracking-tight">FC Dragons</h3>
+<span class="material-symbols-outlined text-accent-blue text-sm" title="Verified Team">verified</span>
+</div>
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-500 font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">trending_up</span>Semi-Pro Level</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">stadium</span>Downtown Arena</span>
+</div>
+</div>
+<div class="w-full @md:w-auto grid grid-cols-2 gap-4 border-t @md:border-t-0 @md:border-l border-slate-300 dark:border-slate-700 pt-4 @md:pt-0 @md:pl-6">
+<div class="space-y-0.5">
+<p class="text-[10px] uppercase font-bold text-slate-500">Kickoff</p>
+<p class="font-semibold text-primary">Sat, 18:00</p>
+</div>
+<div class="space-y-0.5">
+<p class="text-[10px] uppercase font-bold text-slate-500">Pitch</p>
+<div class="flex items-center gap-1.5">
+<p class="font-semibold">Paid</p>
+<div class="size-2 rounded-full bg-accent-blue animate-pulse"></div>
+</div>
+</div>
+</div>
+<button class="w-full @md:w-auto bg-primary text-background-dark font-black uppercase tracking-tighter px-8 py-3 rounded-xl hover:scale-105 active:scale-95 transition-all">
+                                Challenge
+                            </button>
+</div>
+</div>
+<!-- Match Request Card 2 -->
+<div class="bento-card group relative overflow-hidden bg-slate-200 dark:bg-surface-dark rounded-2xl border border-slate-300 dark:border-slate-800 p-6">
+<div class="flex flex-col @md:flex-row gap-6 items-start @md:items-center">
+<div class="relative">
+<div class="size-20 rounded-full bg-slate-800 border-4 border-slate-700 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Midnight Strikers logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNWVjRS1KY-BUyrw1A85PQ2zmqucNQdmSoGuVdLlCIqE0RWDeglk3yAVEexFv9RCn2yWwUCWAeYNvDG0CPUAPNwjZ7yjucCuL72OHuI1vWo6Y_bDtQODmGlwSv6-uV0itqVB9je94bGXBYq_dvjg0u1zpw1I4Nk268gf2hYipihaAkL9-a43-LT-Car1yVdCZkFkb90LPuF8bWbY5M-EmdGdTkhJ6fcIEaGT3ahBtJcsDk0UGjJ9ZkIxYQhiSUCtYV7OssEgGsdN8')"></div>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-2">
+<h3 class="text-xl font-bold uppercase tracking-tight text-white">Midnight Strikers</h3>
+</div>
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-500 font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">trending_up</span>Professional Level</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">stadium</span>North Park Field</span>
+</div>
+</div>
+<div class="w-full @md:w-auto grid grid-cols-2 gap-4 border-t @md:border-t-0 @md:border-l border-slate-300 dark:border-slate-700 pt-4 @md:pt-0 @md:pl-6">
+<div class="space-y-0.5">
+<p class="text-[10px] uppercase font-bold text-slate-500">Kickoff</p>
+<p class="font-semibold text-primary">Sun, 20:30</p>
+</div>
+<div class="space-y-0.5">
+<p class="text-[10px] uppercase font-bold text-slate-500">Pitch</p>
+<p class="font-semibold text-slate-100">Free Entry</p>
+</div>
+</div>
+<button class="w-full @md:w-auto bg-primary text-background-dark font-black uppercase tracking-tighter px-8 py-3 rounded-xl hover:scale-105 active:scale-95 transition-all">
+                                Challenge
+                            </button>
+</div>
+</div>
+<!-- Match Request Card 3 -->
+<div class="bento-card group relative overflow-hidden bg-slate-200 dark:bg-surface-dark rounded-2xl border border-slate-300 dark:border-slate-800 p-6 opacity-75 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex flex-col @md:flex-row gap-6 items-start @md:items-center">
+<div class="size-20 rounded-full bg-slate-800 border-4 border-slate-700 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Urban Kickers logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD8a93LrUyfC005z6htN_PfI0iCvpYa1TrFxGeafVjuAC4iKa4CPrdMp0PEsWiIqOAhuTR6r9QUXlCU6334tZBrJb6xhGEB4ZIIus9UhO9JzxxmoaGOmw8plveqjVElTe7NkywPzqR4ZYQSKaw2UA6MNND0kXacYkJADQjFezaOGqy9xF7pW0oEwinnOcCMaM8n26kf4xBaQvpaQFdjpQiynEdLDVbXeF374TD0Vm_1wvWNEYbuNyMXZuQKNLrZS3ojqCS9sMEONpc')"></div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-2">
+<h3 class="text-xl font-bold uppercase tracking-tight">Urban Kickers</h3>
+</div>
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-500 font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">trending_up</span>Amateur Level</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">stadium</span>East Arena</span>
+</div>
+</div>
+<div class="w-full @md:w-auto grid grid-cols-2 gap-4 border-t @md:border-t-0 @md:border-l border-slate-300 dark:border-slate-700 pt-4 @md:pt-0 @md:pl-6">
+<div class="space-y-0.5">
+<p class="text-[10px] uppercase font-bold text-slate-500">Kickoff</p>
+<p class="font-semibold text-primary">Fri, 19:30</p>
+</div>
+<div class="space-y-0.5">
+<p class="text-[10px] uppercase font-bold text-slate-500">Pitch</p>
+<p class="font-semibold">Paid</p>
+</div>
+</div>
+<button class="w-full @md:w-auto bg-primary/20 text-primary border-2 border-primary/20 font-black uppercase tracking-tighter px-8 py-3 rounded-xl hover:bg-primary hover:text-background-dark transition-all">
+                                Challenge
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar (Desktop Stats) -->
+<aside class="w-full lg:w-80 space-y-6">
+<!-- My Team Quick Card -->
+<div class="bg-surface-dark border border-slate-800 rounded-2xl p-6 overflow-hidden relative">
+<div class="absolute -right-4 -top-4 size-24 bg-primary/5 rounded-full blur-2xl"></div>
+<p class="text-[10px] uppercase font-bold text-primary mb-4">My Team Status</p>
+<div class="flex items-center gap-4 mb-6">
+<div class="size-14 rounded-xl bg-slate-700 flex items-center justify-center border border-slate-600">
+<span class="material-symbols-outlined text-primary text-3xl">shield</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Street Lions FC</h4>
+<p class="text-xs text-slate-400">Amateur • 12 Players</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-background-dark p-3 rounded-xl border border-slate-800">
+<p class="text-[10px] uppercase text-slate-500 font-bold">W/L Ratio</p>
+<p class="text-xl font-bold">75%</p>
+</div>
+<div class="bg-background-dark p-3 rounded-xl border border-slate-800">
+<p class="text-[10px] uppercase text-slate-500 font-bold">Matches</p>
+<p class="text-xl font-bold">24</p>
+</div>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="bg-slate-200 dark:bg-surface-dark border border-slate-300 dark:border-slate-800 rounded-2xl p-6">
+<h3 class="font-bold uppercase tracking-tight mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">history</span>
+                        Recent Activity
+                    </h3>
+<div class="space-y-4">
+<div class="flex gap-3 text-sm">
+<div class="size-2 rounded-full bg-accent-blue mt-1.5 shrink-0"></div>
+<p class="text-slate-500"><span class="text-slate-900 dark:text-slate-200 font-bold">Southside United</span> sent you a match invitation.</p>
+</div>
+<div class="flex gap-3 text-sm">
+<div class="size-2 rounded-full bg-primary mt-1.5 shrink-0"></div>
+<p class="text-slate-500">Your challenge to <span class="text-slate-900 dark:text-slate-200 font-bold">Titan Squad</span> was accepted!</p>
+</div>
+<div class="flex gap-3 text-sm">
+<div class="size-2 rounded-full bg-slate-600 mt-1.5 shrink-0"></div>
+<p class="text-slate-500">New field <span class="text-slate-900 dark:text-slate-200 font-bold">Sky Pitch</span> opened in Downtown.</p>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-xs font-bold text-slate-500 uppercase hover:text-primary transition-colors">View All History</button>
+</div>
+<!-- Ad/Promo Mini Section -->
+<div class="rounded-2xl overflow-hidden aspect-[4/3] relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent z-10"></div>
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Premium football field background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4ba1p_XyqkR9R8G7CycQy-UBzyoLLq7ubOvSRG-Zlxqtz4bqzmfQ3OqS3dCU2tl1THdHGleEqxU4P0tQ2hR8JIeNWwgZL1pGAcfoCy6fNS87MbKDlO3xu548rOsylobEBMba3K67L9pTXoh5zs4CYZ9Xo2mLDMt08jJdbW3gq9qGfrocsPjZ2v6m1GWwPD_v-zrpJZ8JHG_styEu3WtVakTFSwEgseChym1jJyaKC4WoGNPyZZzT19HR5p8i-6Qr94NfrCBMDfoU')"></div>
+<div class="absolute bottom-4 left-4 z-20">
+<p class="text-xs font-bold text-primary uppercase">Elite Pitches</p>
+<h4 class="text-xl font-bold leading-tight">Book the Champions Arena today</h4>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-8 right-8 size-16 bg-primary text-background-dark rounded-full flex items-center justify-center shadow-2xl fab-glow hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined font-black text-3xl">add</span>
+<div class="absolute right-20 bg-background-dark text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-lg border border-primary/30 whitespace-nowrap hidden group-hover:block lg:block">Post a Match</div>
+</button>
+</body></html>

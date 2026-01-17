@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Match Management Flow - MatchUp Football</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a7ff24",
+                        "background-light": "#f1f1f3",
+                        "background-dark": "#1b1b1d",
+                        "surface-dark": "#2c2c2e",
+                        "accent-orange": "#ff9500",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .status-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="border-b border-slate-200 dark:border-white/10 px-6 py-4 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-50">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary text-background-dark rounded flex items-center justify-center">
+<span class="material-symbols-outlined font-bold">sports_soccer</span>
+</div>
+<h2 class="text-xl font-bold tracking-tighter uppercase italic">MatchUp</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors text-primary" href="#">Match Flow</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">My Fields</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-slate-200 dark:bg-surface-dark border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search matches..." type="text"/>
+</div>
+<button class="bg-primary text-background-dark px-4 py-2 rounded-lg font-bold text-sm hover:scale-105 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                    Find a Match
+                </button>
+<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
+<img alt="User Profile Avatar" data-alt="Portrait of a young male soccer player" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC031JC1Cxnujn8x67yOnlyjodAAg1joK7WkHgGS9PlWnpnRF22n7VkUquWi4MULo7IwlAd4iHyU17dLNZtzaV_QUZFU8rzVi77Kr93azGhqkcaNDz5ZtcurGgaT7uftkpOnYlgTgZaPa_kJdRvQuANmuimkm_jjtyLlArUp9BX78N2SkXZiO357ntUHQFEm7pOIaJNcNn3ZFjNMYMS1OeTbkGeASTRmJKcKLFFn9iHzpk1BFIiJnI6TdrIfi2d3vvQpQMURE_WYPY"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Stats Summary Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-white/5 flex items-center justify-between">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest">Active Requests</p>
+<p class="text-3xl font-bold mt-1">04</p>
+</div>
+<div class="size-12 rounded-full bg-accent-orange/10 flex items-center justify-center text-accent-orange">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-white/5 flex items-center justify-between">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest">Matches This Week</p>
+<p class="text-3xl font-bold mt-1 text-primary">02</p>
+</div>
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">event_available</span>
+</div>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-white/5 flex items-center justify-between">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest">Team Rating</p>
+<div class="flex items-baseline gap-1 mt-1">
+<p class="text-3xl font-bold">4.9</p>
+<span class="text-primary text-sm font-bold">PRO</span>
+</div>
+</div>
+<div class="size-12 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
+<span class="material-symbols-outlined">stars</span>
+</div>
+</div>
+</div>
+<!-- Dashboard Layout -->
+<div class="bento-grid">
+<!-- Column 1: Pending Requests -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-bold text-lg uppercase tracking-tight flex items-center gap-2">
+<span class="size-2 rounded-full bg-accent-orange status-pulse"></span>
+                        Pending <span class="text-slate-500 text-sm font-normal">(3)</span>
+</h3>
+</div>
+<!-- Pending Card 1 -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-white/5 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-black bg-accent-orange/20 text-accent-orange px-2 py-0.5 rounded uppercase tracking-tighter">Searching</span>
+<h4 class="font-bold mt-2 text-lg">London Lions FC</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Competitive • 7-a-side</p>
+</div>
+<div class="size-10 rounded-lg bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">shield</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span>Tomorrow, 19:30</span>
+</div>
+<div class="flex gap-2 pt-2">
+<button class="flex-1 bg-primary text-background-dark font-bold py-2 rounded-lg text-sm hover:brightness-110">Accept</button>
+<button class="flex-1 bg-transparent border border-slate-300 dark:border-white/10 font-bold py-2 rounded-lg text-sm hover:bg-white/5">Decline</button>
+</div>
+</div>
+<!-- Pending Card 2 -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-white/5 space-y-4 opacity-75 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-black bg-slate-200 dark:bg-white/10 text-slate-500 px-2 py-0.5 rounded uppercase tracking-tighter">Invite Sent</span>
+<h4 class="font-bold mt-2 text-lg">Hackney Hawks</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Casual • 5-a-side</p>
+</div>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>Wed, 18:00</span>
+</div>
+</div>
+</div>
+<!-- Column 2: Confirmed Matches (Hero Column) -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-bold text-lg uppercase tracking-tight flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+                        Confirmed <span class="text-slate-500 text-sm font-normal">(2)</span>
+</h3>
+</div>
+<!-- Confirmed Hero Card -->
+<div class="bg-white dark:bg-surface-dark rounded-xl border-2 border-primary/30 overflow-hidden shadow-2xl shadow-primary/5">
+<div class="p-6 space-y-6">
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-black bg-primary text-background-dark px-2 py-0.5 rounded uppercase tracking-tighter">Upcoming</span>
+<span class="text-[10px] font-black bg-blue-500 text-white px-2 py-0.5 rounded uppercase tracking-tighter">Verified Field</span>
+</div>
+<h4 class="text-2xl font-bold tracking-tight pt-2">The Derby: Titans vs. Rovers</h4>
+<p class="text-slate-500 dark:text-slate-400 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                    Stratford Olympic Park, Field 4
+                                </p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-primary uppercase tracking-widest">Starts In</p>
+<p class="text-2xl font-black font-display tracking-tighter">02:14:55</p>
+</div>
+</div>
+<!-- Map Snippet -->
+<div class="relative h-48 w-full rounded-lg overflow-hidden border border-white/5">
+<img alt="Map Location View" class="w-full h-full object-cover" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfq9jUGXfz9TU-olHyXWQ1Qi-hYh1_lIJpn7QZTPFGBQ1t1R2ky-tNYwKLlN4otUE69VpIpX4pFdHJ4Zq4pTqDd2QUBAaffYVkwfresoVaW99aDLYe8H3u3TkJk7g3wCP8s1Axb9xtDgDLB98Dss-XNTwqz6dd52JOc4OfgLLCKoOaI5DWGWOAuHzxHEeTAftSEGrNSN6SLi4EwQiF-C7iLfuj83qn4Rvksphj4vtlrcl8NW0G0N2u9nYN50ha5wnzcvgPiPkiAPc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-full flex items-center justify-center text-background-dark shadow-lg">
+<span class="material-symbols-outlined">sports_soccer</span>
+</div>
+<div class="text-white">
+<p class="text-sm font-bold">Field 4 Entrance</p>
+<p class="text-[10px] opacity-70">Gate B, North Side</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex -space-x-2">
+<img alt="Player 1" class="size-8 rounded-full border-2 border-surface-dark" data-alt="Profile photo of teammate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAku_U37iLM1GzLVv5Y3Vub9wIRk3YQalnosFGw7TqIqEN0eZk9pBkwaVXqaDBEoccLBb75svedH8JKq2gSLwC5ibyarFJTGIqdF1LGontBcxXFQ60o5m6TxUGAjVZvcy_cS2QwJIvHPJQ2ZEN0e1iczktMqhTZYWOSyxgAkWVxobbdFf4YD7UVtQnBB5Y_go9DeFfPqfG5djaEkyZBIAH1d5F1VxOxbSGSPQMfL9yQRllSRq9bmUefzUbi1hNrKp4pubELp-xQh-k"/>
+<img alt="Player 2" class="size-8 rounded-full border-2 border-surface-dark" data-alt="Profile photo of teammate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmb_xmkiJ75K5lJTvrLpsyqdNDoB8e67AfUHCzFv4ZLxCJyULTUAimMpAK7BuZKQUmMGiPa0eh4z0ywlxPFlJel-xlMNEJK6uxc8YzqpJdA1yja7zjhdXAtmTkBBmdSr7cT9p9vuZlF-K2BVNvq3QPlBhGci53QZV4lk8N8JDP6BstEtuFwLmCSFMmyvI4zt2qG_3B6llqMSju0tW6Dr8ecUB5zR1gQAMiK3rcZPL298uQ01sXcBa7gEC7THsM_Qe8BqTE-g6du3w"/>
+<img alt="Player 3" class="size-8 rounded-full border-2 border-surface-dark" data-alt="Profile photo of teammate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5N8hQ7-bH2BK0Mf5SyCNueUTW2olaHm2NsNFPB5p8WGVyhzBhhhWACUBIkGs5gCaZ_OOGBBn-6s5B1QIR-s9XGPvNfY4Hb-uiMlYjgQvzz9BwK-tKNSNREiUa4PMLgnH1QSTJaPeUYbHzSII7gsefT5mrlf9ZTfzONUAD5mENKm8CCsHWmqpiGWa4oYObRTL9pQpRE44JkrRsvPva_q7RorTj_xtwM0G02O4gj_At3zAC6pp7PZhc25gKruV_Z0O3_kHl3J9RNjQ"/>
+<div class="size-8 rounded-full border-2 border-surface-dark bg-slate-700 flex items-center justify-center text-[10px] font-bold">+8</div>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-background-dark transition-all p-2 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="bg-primary text-background-dark font-bold px-6 py-2 rounded-lg text-sm flex items-center gap-2 hover:scale-105 transition-all">
+                                    Open Chat
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 3: Past Matches -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="font-bold text-lg uppercase tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500">history</span>
+                        History
+                    </h3>
+</div>
+<!-- Past Card 1 -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-white/5 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Oct 24, 2023</p>
+<h4 class="font-bold text-base mt-1">Titans vs. United</h4>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-primary">4 - 2</p>
+<p class="text-[10px] font-bold text-primary uppercase">Win</p>
+</div>
+</div>
+<div class="h-[1px] bg-slate-200 dark:bg-white/5"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">military_tech</span>
+<span class="text-xs font-medium">MVP: Alex J.</span>
+</div>
+<button class="text-xs font-bold text-slate-400 hover:text-white transition-colors underline underline-offset-4">Match Stats</button>
+</div>
+</div>
+<!-- Past Card 2 -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-white/5 space-y-4 opacity-80">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Oct 20, 2023</p>
+<h4 class="font-bold text-base mt-1">Titans vs. Wolves</h4>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-slate-400">1 - 3</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Loss</p>
+</div>
+</div>
+<button class="w-full bg-slate-100 dark:bg-white/5 py-2 rounded-lg text-xs font-bold hover:bg-primary/10 hover:text-primary transition-colors">Request Rematch</button>
+</div>
+<!-- Past Card 3 -->
+<div class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-white/5 space-y-4 opacity-60">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Oct 15, 2023</p>
+<h4 class="font-bold text-base mt-1">Titans vs. City</h4>
+</div>
+<div class="text-right">
+<p class="text-xl font-black text-primary">2 - 2</p>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Draw</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Mobile only indicator) -->
+<div class="fixed bottom-6 right-6 md:hidden">
+<button class="size-14 bg-primary text-background-dark rounded-full shadow-2xl flex items-center justify-center transform active:scale-95">
+<span class="material-symbols-outlined font-bold">add</span>
+</button>
+</div>
+</body></html>
