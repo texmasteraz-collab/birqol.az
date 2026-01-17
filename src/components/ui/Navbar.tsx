@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import { Input } from './Input'
-import { createClient } from '@/utils/supabase/server'
+import { getUser } from '@/utils/supabase/user'
 import { signout } from '@/app/auth/actions'
 
 export async function Navbar() {
     // Safe auth check for server component
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const user = await getUser()
 
     return (
         <>

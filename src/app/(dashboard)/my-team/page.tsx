@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { removeTeamMember } from "@/app/(dashboard)/my-team/actions";
 import { AddMemberForm } from "@/components/features/AddMemberForm";
+import { getUser } from "@/utils/supabase/user";
 
 interface TeamMember {
     id: string;
@@ -17,7 +18,7 @@ interface TeamMember {
 
 export default async function MyTeamPage() {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     // Mock checking if user has a team
     const { data: team } = await supabase
